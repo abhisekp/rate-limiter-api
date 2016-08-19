@@ -1,0 +1,28 @@
+{
+  "passPerPreset": true,
+  "plugins": [
+    "lodash",
+    "transform-undefined-to-void",
+    ["typecheck", {
+      "disable": {
+        "production": true
+      }
+    }]
+  ],
+  "presets": [
+    "es2016",
+    "stage-0"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-member-expression-literals",
+        "transform-merge-sibling-variables",
+        "transform-minify-booleans",
+        "transform-property-literals",
+        "transform-remove-debugger",
+        "transform-simplify-comparison-operators"
+      ]
+    }
+  }
+}
