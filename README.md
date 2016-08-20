@@ -21,7 +21,7 @@ A library to easily manage rate limits of API without any hassle.
 ## <a id="usage"></a>Usage <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
 #### <a id="usage-browser"></a>Browser <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
 ```html
-<script src=""></script>
+<script src="https://cdn.rawgit.com/abhisekp/rate-limiter-api/master/dist/rate-limiter-api.js"></script>
 ```
 
 #### <a id="usage-nodejs"></a>NodeJS <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
