@@ -8,7 +8,7 @@ module.exports = {
 	output: {
 		path: path.join(String(appRoot), 'dist'),
 		filename: 'rate-limiter-api.js',
-		library: 'RateLimiterApi',
+		library: 'RateLimiterAPI',
 		libraryTarget: 'umd',
 		umdNamedDefine: true,
 	},
