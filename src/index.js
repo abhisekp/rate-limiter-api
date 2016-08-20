@@ -79,7 +79,7 @@ const RateLimiterAPI = stampit()
 			return new Promise((resolve, reject) => {
 				const responseHandler = (err, response) => {
 					// console.log('Concurrency:', q.concurrency)
-					console.dir(rateLimits, {colors:1})
+					// console.dir(rateLimits, {colors:1})
 
 					const concurrency = rateLimits.rateRemaining - this.threshold
 					if (concurrency <= 1) {
