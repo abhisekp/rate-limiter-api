@@ -10,8 +10,7 @@
     }]
   ],
   "presets": [
-    "es2016",
-    "stage-0"
+    "es2015"
   ],
   "env": {
     "production": {
