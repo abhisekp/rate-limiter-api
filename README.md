@@ -1,9 +1,9 @@
 # <a id="app-top"></a> Rate Limiter API
+A simple library to easily manage rate limits of APIs without any hassles.
 
 [![Rate Limiter API image](http://i.imgur.com/JDFpgQZ.jpg "Rate Limiter API image")](#app-top)
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contrib) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE)  
-A library to easily manage rate limits of API without any hassle.
 
 ## <a id="toc"></a> Table of Contents
 - [How to Use](#usage)
