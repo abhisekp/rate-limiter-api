@@ -7,8 +7,8 @@ A simple library to easily manage rate limits of APIs without any hassles.
 
 ## <a id="toc"></a> Table of Contents
 - [How to Use](#usage)
- - [Browser](#usage-browser)
- - [NodeJS](#usage-nodejs)
+  - [Browser](#usage-browser)
+  - [NodeJS](#usage-nodejs)
 - [Public API](#public-api)
 - [Stats](#stats)
 - [Technologies Used](#techs)
@@ -24,7 +24,7 @@ A simple library to easily manage rate limits of APIs without any hassles.
 <script src="https://cdn.rawgit.com/abhisekp/rate-limiter-api/master/dist/rate-limiter-api.js"></script>
 
 <script type="text/javascript">
-  var rl = RateLimiterAPI()
+  var rateLimiter = RateLimiterAPI()
 </script>
 ```
 
@@ -39,16 +39,16 @@ import RateLimiterAPI from 'rate-limiter-api'
 
 
 ## <a id="public-api"></a>Public Interface <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-- `rl = RateLimiterAPI({threshold: 5})`
-- `rl.limit(requestHandler) => Promise`
- - `rl.updateRateLimits` on success to update rates
+- `rateLimiter = RateLimiterAPI({threshold: 5})`
+- `rateLimiter.limit(requestHandler) => Promise`
+ - `rateLimiter.updateRateLimits` on success to update rates
  - `requestHandler(responseHandler)` on success to continue
 
 ----
 ```js
 import RateLimiterAPI from 'rate-limiter-api'
 
-const rl = RateLimiterAPI({
+const rateLimiter = RateLimiterAPI({
   threshold: 5, // leave `threshold` amount of api requests intact (minimum: 1)
 })
 ```
@@ -57,12 +57,12 @@ Pass an optional `threshold` value which would limit the total rate limits till 
 
 ----
 ```js
-const request = rl.limit(requestHandler) //=> Promise
+const request = rateLimiter.limit(requestHandler) //=> Promise
 
 function requestHandler(responseHandler) {
   fetch('https://api.example.com/get')
     .then((response) => {
-      rl.updateRateLimits({
+      rateLimiter.updateRateLimits({
         rateLimit: response.headers.rateLimit,
         rateRemaining: response.headers.rateRemaining,
         rateReset: response.headers.rateReset,
