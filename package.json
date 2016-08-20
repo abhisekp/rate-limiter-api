@@ -1,6 +1,6 @@
 {
   "name": "rate-limiter-api",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A simple library to easily manage rate limits of APIs without any hassles.",
   "main": "index.js",
   "scripts": {
