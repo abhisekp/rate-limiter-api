@@ -3,7 +3,7 @@ A simple library to easily manage rate limits of APIs without any hassles.
 
 [![Rate Limiter API image](http://i.imgur.com/JDFpgQZ.jpg "Rate Limiter API image")](#app-top)
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contrib) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE) [![npm version](https://img.shields.io/npm/v/rate-limiter-api.svg)](https://badge.fury.io/js/rate-limiter-api)  
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE) [![npm version](https://img.shields.io/npm/v/rate-limiter-api.svg)](https://badge.fury.io/js/rate-limiter-api)  
 
 ## <a id="toc"></a> Table of Contents
 - [How to Use](#usage)
@@ -128,7 +128,7 @@ JavaScript|1|12|37|62
 ## <a id="contrib"></a>Contributors <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [![Abhisek Pattnaik](https://avatars.githubusercontent.com/u/1029200?v=3&s=100)<br /><sub>Abhisek Pattnaik</sub>](http://about.me/abhisekp)<br />[💻](https://github.com/abhisekp/Practice-Modern-JavaScript/commits?author=abhisekp) 🎨 [📖](https://github.com/abhisekp/Practice-Modern-JavaScript/commits?author=abhisekp) 💡 |
+| [<img src="https://avatars.githubusercontent.com/u/1029200?v=3" width="100px;"/><br /><sub>Abhisek Pattnaik</sub>](http://about.me/abhisekp)<br />[💻](https://github.com/abhisekp/rate-limiter-api/commits?author=abhisekp) 🎨 [📖](https://github.com/abhisekp/rate-limiter-api/commits?author=abhisekp) 💡 |
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors#emoji-key) specification.
