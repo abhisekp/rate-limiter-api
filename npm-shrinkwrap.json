@@ -1,6 +1,6 @@
 {
   "name": "rate-limiter-api",
-  "version": "1.0.1-0",
+  "version": "1.0.1",
   "dependencies": {
     "acorn": {
       "version": "3.3.0",
