@@ -1,9 +1,8 @@
 // import 'source-map-support/register'
-import 'babel-polyfill'
+// import 'babel-polyfill'
 import stampit from 'stampit'
-import queue from 'async-es/queue'
-import isNumber from 'lodash-es/isNumber'
-import isFunction from 'lodash-es/isFunction'
+import {queue} from 'async'
+import {isFunction, isNumber} from 'lodash/fp'
 
 /**
  * strategy: 'burst-first' | 'uniform'
@@ -32,10 +31,10 @@ const RateLimiterAPI = stampit()
 		/**
 		 * Update rate limits every time a request is made
 		 * @method updateRateLimits
-		 * @param	{number}				 rateLimit		 Maximum rate limit
-		 * @param	{number}				 rateRemaining Remaining number of requests in current pulse
-		 * @param	{number}				 rateReset		 Next reset time
-		 * @return {object}											 Rate limiter object (this)
+		 * @param	{number}         rateLimit     Maximum rate limit
+		 * @param	{number}         rateRemaining Remaining number of requests in current pulse
+		 * @param	{number}         rateReset     Next reset time
+		 * @return {object}                      Rate limiter object (this)
 		 */
 		this.updateRateLimits = function ({
 			rateLimit, rateRemaining, rateReset
@@ -68,11 +67,11 @@ const RateLimiterAPI = stampit()
 		 * Accepts a callback (the task) and returns a promise. The promise resolves when the task finishes.
 		 * @method limit
 		 * @param {function(function)} requestHandler(responseHandler) Limit the requestHandler and pass the responseHandler.
- 	 	 *																														 The responseHandler is called by the requestHandler
- 	 	 *																														 after request is successful.
- 	 	 *																														 requestHandler has node-style callback i.e. it accepts an
- 	 	 *																														 Error object as first param and/or response as the second
-		 *																														 param.
+ 	 	 *                                                             The responseHandler is called by the requestHandler
+ 	 	 *                                                             after request is successful.
+ 	 	 *                                                             requestHandler has node-style callback i.e. it accepts an
+ 	 	 *                                                             Error object as first param and/or response as the second
+		 *                                                             param.
 		 * @param {object} option.immediate Immediately process the request
 		 * @return {Promise} Return a promise to resolve when the request completes
 		 */
@@ -81,6 +80,7 @@ const RateLimiterAPI = stampit()
 				const responseHandler = (err, response) => {
 					// console.log('Concurrency:', q.concurrency)
 					console.dir(rateLimits, {colors:1})
+
 					const concurrency = rateLimits.rateRemaining - this.threshold
 					if (concurrency <= 1) {
 						// next reset time difference
