@@ -15,7 +15,7 @@ import isFunction from 'lodash-es/isFunction'
  * uniformly in the remaining time period from the rateReset time
  * whichever is lower.
  */
-const RateLimiter = stampit()
+const RateLimiterAPI = stampit()
 	.refs({
 		strategy: 'burst-first',
 		numberOfRequests: Infinity, // max. number of requests per pulse
@@ -111,4 +111,4 @@ const RateLimiter = stampit()
 		}
 	})
 
-export default RateLimiter
+export default RateLimiterAPI
