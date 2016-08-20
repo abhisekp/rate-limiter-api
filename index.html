@@ -60,7 +60,7 @@
 <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://cdn.rawgit.com/abhisekp/rate-limiter-api/master/dist/rate-limiter-api.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
 
 <span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
-<span class="pl-s1">  <span class="pl-k">var</span> rl <span class="pl-k">=</span> <span class="pl-en">RateLimiterAPI</span>()</span>
+<span class="pl-s1">  <span class="pl-k">var</span> rateLimiter <span class="pl-k">=</span> <span class="pl-en">RateLimiterAPI</span>()</span>
 <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
 <h4>
@@ -76,13 +76,13 @@
 </h2>
 
 <ul>
-<li><code>rl = RateLimiterAPI({threshold: 5})</code></li>
+<li><code>rateLimiter = RateLimiterAPI({threshold: 5})</code></li>
 <li>
-<code>rl.limit(requestHandler) =&gt; Promise</code>
+<code>rateLimiter.limit(requestHandler) =&gt; Promise</code>
 
 <ul>
 <li>
-<code>rl.updateRateLimits</code> on success to update rates</li>
+<code>rateLimiter.updateRateLimits</code> on success to update rates</li>
 <li>
 <code>requestHandler(responseHandler)</code> on success to continue</li>
 </ul>
@@ -93,7 +93,7 @@
 
 <div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">RateLimiterAPI</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>rate-limiter-api<span class="pl-pds">'</span></span>
 
-<span class="pl-k">const</span> <span class="pl-c1">rl</span> <span class="pl-k">=</span> <span class="pl-en">RateLimiterAPI</span>({
+<span class="pl-k">const</span> <span class="pl-c1">rateLimiter</span> <span class="pl-k">=</span> <span class="pl-en">RateLimiterAPI</span>({
   threshold<span class="pl-k">:</span> <span class="pl-c1">5</span>, <span class="pl-c">// leave `threshold` amount of api requests intact (minimum: 1)</span>
 })</pre></div>
 
@@ -101,12 +101,12 @@
 
 <hr>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-k">const</span> <span class="pl-c1">request</span> <span class="pl-k">=</span> <span class="pl-smi">rl</span>.<span class="pl-en">limit</span>(requestHandler) <span class="pl-c">//=&gt; Promise</span>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">const</span> <span class="pl-c1">request</span> <span class="pl-k">=</span> <span class="pl-smi">rateLimiter</span>.<span class="pl-en">limit</span>(requestHandler) <span class="pl-c">//=&gt; Promise</span>
 
 <span class="pl-k">function</span> <span class="pl-en">requestHandler</span>(<span class="pl-smi">responseHandler</span>) {
   <span class="pl-en">fetch</span>(<span class="pl-s"><span class="pl-pds">'</span>https://api.example.com/get<span class="pl-pds">'</span></span>)
     .<span class="pl-en">then</span>((<span class="pl-smi">response</span>) <span class="pl-k">=&gt;</span> {
-      <span class="pl-smi">rl</span>.<span class="pl-en">updateRateLimits</span>({
+      <span class="pl-smi">rateLimiter</span>.<span class="pl-en">updateRateLimits</span>({
         rateLimit<span class="pl-k">:</span> <span class="pl-smi">response</span>.<span class="pl-c1">headers</span>.<span class="pl-smi">rateLimit</span>,
         rateRemaining<span class="pl-k">:</span> <span class="pl-smi">response</span>.<span class="pl-c1">headers</span>.<span class="pl-smi">rateRemaining</span>,
         rateReset<span class="pl-k">:</span> <span class="pl-smi">response</span>.<span class="pl-c1">headers</span>.<span class="pl-smi">rateReset</span>,
