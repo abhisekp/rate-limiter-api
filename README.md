@@ -41,8 +41,8 @@ import RateLimiterAPI from 'rate-limiter-api'
 ## <a id="public-api"></a>Public Interface <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
 - `rateLimiter = RateLimiterAPI({threshold: 5})`
 - `rateLimiter.limit(requestHandler) => Promise`
- - `rateLimiter.updateRateLimits` on success to update rates
- - `requestHandler(responseHandler)` on success to continue
+  - `rateLimiter.updateRateLimits` on success to update rates
+  - `requestHandler(responseHandler)` on success to continue
 
 ----
 ```js
