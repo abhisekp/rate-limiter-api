@@ -3,7 +3,7 @@ A simple library to easily manage rate limits of APIs without any hassles.
 
 [![Rate Limiter API image](http://i.imgur.com/JDFpgQZ.jpg "Rate Limiter API image")](#app-top)
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contrib) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE) [![npm version](https://badge.fury.io/js/rate-limiter-api.svg)](https://badge.fury.io/js/rate-limiter-api)  
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contrib) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE) [![npm version](https://img.shields.io/npm/v/rate-limiter-api.svg?maxAge=2592000)](https://badge.fury.io/js/rate-limiter-api)  
 
 ## <a id="toc"></a> Table of Contents
 - [How to Use](#usage)
