@@ -1,4 +1,6 @@
 # <a id="app-top"></a> Rate Limiter API
+
+[![Join the chat at https://gitter.im/abhisekp/rate-limiter-api](https://badges.gitter.im/abhisekp/rate-limiter-api.svg)](https://gitter.im/abhisekp/rate-limiter-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A simple library to easily manage rate limits of APIs without any hassles.
 
 [![Rate Limiter API image](http://i.imgur.com/JDFpgQZ.jpg "Rate Limiter API image")](#app-top)
