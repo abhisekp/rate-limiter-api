@@ -3,7 +3,8 @@ A simple library to easily manage rate limits of APIs without any hassles.
 
 [![Rate Limiter API image](http://i.imgur.com/JDFpgQZ.jpg "Rate Limiter API image")](#app-top)
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE) [![npm version](https://img.shields.io/npm/v/rate-limiter-api.svg)](https://badge.fury.io/js/rate-limiter-api) [![Join the chat at https://gitter.im/abhisekp/rate-limiter-api](https://badges.gitter.im/abhisekp/rate-limiter-api.svg)](https://gitter.im/abhisekp/rate-limiter-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE) [![npm version](https://img.shields.io/npm/v/rate-limiter-api.svg)](https://badge.fury.io/js/rate-limiter-api) [![Join the chat at https://gitter.im/abhisekp/rate-limiter-api](https://badges.gitter.im/abhisekp/rate-limiter-api.svg)](https://gitter.im/abhisekp/rate-limiter-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fabhisekp%2Frate-limiter-api.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fabhisekp%2Frate-limiter-api?ref=badge_shield)
+ 
 
 ## <a id="toc"></a> Table of Contents
 - [How to Use](#usage)
@@ -154,3 +155,6 @@ Chat with <kbd><a href="https://gitter.im/abhisekp">
  <a href="#toc" title="Table of Contents"><kbd><b>Table of Contents ⮭</b></kbd></a><br>
  <a href="#app-top"><kbd><b>back to top ⮭</b></kbd></a>
 </div>
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fabhisekp%2Frate-limiter-api.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fabhisekp%2Frate-limiter-api?ref=badge_large)
