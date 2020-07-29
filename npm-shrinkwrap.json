@@ -2808,12 +2808,6 @@
       "integrity": "sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==",
       "dev": true
     },
-    "buffer-from": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.1.tgz",
-      "integrity": "sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==",
-      "dev": true
-    },
     "buffer-shims": {
       "version": "1.0.0",
       "resolved": "https://registry.npmjs.org/buffer-shims/-/buffer-shims-1.0.0.tgz",
@@ -3714,15 +3708,18 @@
       }
     },
     "elliptic": {
-      "version": "6.3.1",
-      "resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.3.1.tgz",
-      "integrity": "sha1-F3gfIQmrDsaGsUa9z/XS6Mauzto=",
+      "version": "6.5.3",
+      "resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.5.3.tgz",
+      "integrity": "sha512-IMqzv5wNQf+E6aHeIqATs0tOLeOTwj1QKbRcS3jBbYkl5oLAserA8yJTT7/VyHUYG91PRmPyeQDObKLPpeS4dw==",
       "dev": true,
       "requires": {
         "bn.js": "^4.4.0",
         "brorand": "^1.0.1",
         "hash.js": "^1.0.0",
-        "inherits": "^2.0.1"
+        "hmac-drbg": "^1.0.0",
+        "inherits": "^2.0.1",
+        "minimalistic-assert": "^1.0.0",
+        "minimalistic-crypto-utils": "^1.0.0"
       }
     },
     "emittery": {
@@ -4703,6 +4700,17 @@
         "cryptiles": "2.x.x",
         "hoek": "2.x.x",
         "sntp": "1.x.x"
+      }
+    },
+    "hmac-drbg": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/hmac-drbg/-/hmac-drbg-1.0.1.tgz",
+      "integrity": "sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=",
+      "dev": true,
+      "requires": {
+        "hash.js": "^1.0.3",
+        "minimalistic-assert": "^1.0.0",
+        "minimalistic-crypto-utils": "^1.0.1"
       }
     },
     "hoek": {
@@ -5819,6 +5827,12 @@
       "version": "1.0.0",
       "resolved": "https://registry.npmjs.org/minimalistic-assert/-/minimalistic-assert-1.0.0.tgz",
       "integrity": "sha1-cCvi3aazf0g2vLP121ZkG2Sh09M=",
+      "dev": true
+    },
+    "minimalistic-crypto-utils": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz",
+      "integrity": "sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=",
       "dev": true
     },
     "minimatch": {
