@@ -38,7 +38,7 @@
     "async": "^2.0.1",
     "babel-polyfill": "^6.13.0",
     "lodash": "^4.15.0",
-    "npm-run-all": "^3.0.0",
+    "npm-run-all": "^4.0.1",
     "rimraf": "^2.5.4",
     "source-map-support": "^0.4.2",
     "stampit": "^3.0.0"
