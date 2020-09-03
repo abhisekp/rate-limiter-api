@@ -2808,12 +2808,6 @@
       "integrity": "sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==",
       "dev": true
     },
-    "buffer-from": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.1.tgz",
-      "integrity": "sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==",
-      "dev": true
-    },
     "buffer-shims": {
       "version": "1.0.0",
       "resolved": "https://registry.npmjs.org/buffer-shims/-/buffer-shims-1.0.0.tgz",
@@ -4089,12 +4083,6 @@
         "acorn-jsx": "^3.0.0"
       }
     },
-    "esprima": {
-      "version": "2.7.2",
-      "resolved": "https://registry.npmjs.org/esprima/-/esprima-2.7.2.tgz",
-      "integrity": "sha1-9DvlQ2CZhOrkTJM6xjNSpq818zk=",
-      "dev": true
-    },
     "espurify": {
       "version": "1.6.0",
       "resolved": "https://registry.npmjs.org/espurify/-/espurify-1.6.0.tgz",
@@ -5309,13 +5297,21 @@
       "dev": true
     },
     "js-yaml": {
-      "version": "3.6.1",
-      "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.6.1.tgz",
-      "integrity": "sha1-bl/mfYsgXOTSL60Ft3geja3MSzA=",
+      "version": "3.14.0",
+      "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.14.0.tgz",
+      "integrity": "sha512-/4IbIeHcD9VMHFqDR/gQ7EdZdLimOvW2DdcxFjdyyZ9NsbS+ccrXqVWDtab/lRl5AlUqmpBx8EhPaWR+OtY17A==",
       "dev": true,
       "requires": {
         "argparse": "^1.0.7",
-        "esprima": "^2.6.0"
+        "esprima": "^4.0.0"
+      },
+      "dependencies": {
+        "esprima": {
+          "version": "4.0.1",
+          "resolved": "https://registry.npmjs.org/esprima/-/esprima-4.0.1.tgz",
+          "integrity": "sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==",
+          "dev": true
+        }
       }
     },
     "jsbn": {
@@ -7318,24 +7314,13 @@
         "esprima": {
           "version": "4.0.1",
           "resolved": "https://registry.npmjs.org/esprima/-/esprima-4.0.1.tgz",
-          "integrity": "sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==",
-          "dev": true
+          "integrity": "sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A=="
         },
         "indent-string": {
           "version": "3.2.0",
           "resolved": "https://registry.npmjs.org/indent-string/-/indent-string-3.2.0.tgz",
           "integrity": "sha1-Sl/W0nzDMvN+VBmlBNu4NxBckok=",
           "dev": true
-        },
-        "js-yaml": {
-          "version": "3.14.0",
-          "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.14.0.tgz",
-          "integrity": "sha512-/4IbIeHcD9VMHFqDR/gQ7EdZdLimOvW2DdcxFjdyyZ9NsbS+ccrXqVWDtab/lRl5AlUqmpBx8EhPaWR+OtY17A==",
-          "dev": true,
-          "requires": {
-            "argparse": "^1.0.7",
-            "esprima": "^4.0.0"
-          }
         },
         "strip-ansi": {
           "version": "4.0.0",
