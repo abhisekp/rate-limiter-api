@@ -2,7 +2,7 @@ name: Verify published npm releases
 on:
   workflow_dispatch:
   push:
-    branches: [master, 'fix/registry-propagation-checks']
+    branches: [master]
     paths: ['scripts/registry-wait.mjs', 'scripts/verify-packages.mjs', '.github/workflows/verify-published.yml']
 permissions:
   contents: read
