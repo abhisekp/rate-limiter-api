@@ -1,268 +1,141 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Rate Limiter API by abhisekp</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Rate Limiter API</h1>
-      <h2 class="project-tagline">A simple library to easily manage rate limits of APIs without any hassles.</h2>
-      <a href="https://github.com/abhisekp/rate-limiter-api" class="btn">View on GitHub</a>
-      <a href="https://github.com/abhisekp/rate-limiter-api/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/abhisekp/rate-limiter-api/tarball/master" class="btn">Download .tar.gz</a>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Coordinate API requests with rate limits. Explore Rate Limiter API 2.0 and its maintained 1.x compatibility release.">
+  <title>Rate Limiter API — Stay within the limit</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%2375e5bd'/%3E%3Cpath d='M9 21h7l4-10 5 18 4-8h3' fill='none' stroke='%230b1020' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="stylesheets/site.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/rate-limiter-api@2.0.0/dist/rate-limiter-api.js" onload="window.rateLimiterBundleReady=true" onerror="window.rateLimiterBundleFailed=true"></script>
+  <script defer src="scripts/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Rate Limiter API home">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 17h6l4-10 6 19 4-9h4"/></svg></span>
+      <span>rate-limiter<span class="brand-light">-api</span></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="#playground">Playground</a>
+      <a href="#get-started">Get started</a>
+      <a class="nav-github" href="https://github.com/abhisekp/rate-limiter-api" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero section-wrap" id="top">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> Rate limits, handled with care</div>
+        <h1>Stay within<br>the <span class="accent-word">limit.</span></h1>
+        <p class="hero-lede">Queue API requests, respect the quota, and keep your app moving. One small library with a modern Promise API and a maintained compatibility release.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#playground">Try the playground <span aria-hidden="true">↓</span></a>
+          <button class="button button-quiet copy-command" type="button" data-copy="npm install rate-limiter-api"> <span class="copy-icon" aria-hidden="true">⌘</span> <code>npm i rate-limiter-api</code> <span class="copy-label">Copy</span></button>
+        </div>
+        <div class="release-notes" aria-label="Current release lines">
+          <span class="release-pill"><span class="release-dot latest"></span><strong>2.0.0</strong> <span>latest</span></span>
+          <span class="release-pill"><span class="release-dot legacy"></span><strong>1.0.12</strong> <span>legacy support</span></span>
+          <a href="https://www.npmjs.com/package/rate-limiter-api" target="_blank" rel="noreferrer">View on npm <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Illustration of requests moving through a rate limit queue">
+        <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+        <div class="visual-glow"></div>
+        <div class="queue-card">
+          <div class="queue-card-head"><span>REQUEST FLOW</span><span class="live-indicator"><i></i> LIVE</span></div>
+          <div class="flow-row"><span class="flow-icon">↗</span><span class="flow-label">Incoming</span><div class="flow-dots"><i></i><i></i><i></i><i></i><i></i></div><b>08</b></div>
+          <div class="flow-divider"><span></span><span>queue</span><span></span></div>
+          <div class="limiter-node"><span class="node-pulse"></span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 22h7l4-12 8 22 5-11h6"/></svg><div><b>Rate limiter</b><small>2 in flight · 4 queued</small></div><span class="node-check">✓</span></div>
+          <div class="flow-divider output"><span></span><span>controlled</span><span></span></div>
+          <div class="flow-row output-row"><span class="flow-icon">✓</span><span class="flow-label">To API</span><div class="flow-dots"><i></i><i></i></div><b>02</b></div>
+          <div class="quota-line"><span>Window budget</span><div class="quota-track"><i></i><i></i><i></i><i></i><i class="muted"></i><i class="muted"></i></div><strong>4 / 6</strong></div>
+        </div>
+        <div class="floating-chip chip-a"><span class="chip-check">✓</span> quota respected</div>
+        <div class="floating-chip chip-b"><span class="chip-clock">◷</span> resumes on reset</div>
+      </div>
+      <div class="hero-foot"><span>BUILT FOR THE UNPREDICTABLE</span><span>REQUESTS IN · CONTROL OUT <b>↓</b></span></div>
     </section>
 
-    <section class="main-content">
-      <h1>
-<a id="-rate-limiter-api" class="anchor" href="#-rate-limiter-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="app-top"></a> Rate Limiter API</h1>
-
-<p>A simple library to easily manage rate limits of APIs without any hassles.</p>
-
-<p><a href="#app-top"><img src="http://i.imgur.com/JDFpgQZ.jpg" alt="Rate Limiter API image" title="Rate Limiter API image"></a></p>
-
-<p><a href="#contributors"><img src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square" alt="All Contributors"></a> <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&amp;maxAge=2592000" alt="MIT License"></a> <a href="https://badge.fury.io/js/rate-limiter-api"><img src="https://img.shields.io/npm/v/rate-limiter-api.svg" alt="npm version"></a>  </p>
-
-<h2>
-<a id="-table-of-contents" class="anchor" href="#-table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="toc"></a> Table of Contents</h2>
-
-<ul>
-<li>
-<a href="#usage">How to Use</a>
-
-<ul>
-<li><a href="#usage-browser">Browser</a></li>
-<li><a href="#usage-nodejs">NodeJS</a></li>
-</ul>
-</li>
-<li><a href="#public-api">Public API</a></li>
-<li><a href="#stats">Stats</a></li>
-<li><a href="#techs">Technologies Used</a></li>
-<li><a href="#help">Help &amp; Support</a></li>
-<li><a href="#contrib">Contributors</a></li>
-<li><a href="#license">License</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-
-<h2>
-<a id="usage-" class="anchor" href="#usage-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="usage"></a>Usage <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h2>
-
-<h4>
-<a id="browser-" class="anchor" href="#browser-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="usage-browser"></a>Browser <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h4>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://cdn.rawgit.com/abhisekp/rate-limiter-api/master/dist/rate-limiter-api.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
-
-<span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
-<span class="pl-s1">  <span class="pl-k">var</span> rateLimiter <span class="pl-k">=</span> <span class="pl-en">RateLimiterAPI</span>()</span>
-<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
-
-<h4>
-<a id="nodejs-" class="anchor" href="#nodejs-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="usage-nodejs"></a>NodeJS <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h4>
-
-<div class="highlight highlight-source-shell"><pre>$ {sudo -H} npm install -S rate-limiter-api</pre></div>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">RateLimiterAPI</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>rate-limiter-api<span class="pl-pds">'</span></span></pre></div>
-
-<h2>
-<a id="public-interface-" class="anchor" href="#public-interface-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="public-api"></a>Public Interface <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h2>
-
-<ul>
-<li><code>rateLimiter = RateLimiterAPI({threshold: 5})</code></li>
-<li>
-<code>rateLimiter.limit(requestHandler) =&gt; Promise</code>
-
-<ul>
-<li>
-<code>rateLimiter.updateRateLimits</code> on success to update rates</li>
-<li>
-<code>requestHandler(responseHandler)</code> on success to continue</li>
-</ul>
-</li>
-</ul>
-
-<hr>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">RateLimiterAPI</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>rate-limiter-api<span class="pl-pds">'</span></span>
-
-<span class="pl-k">const</span> <span class="pl-c1">rateLimiter</span> <span class="pl-k">=</span> <span class="pl-en">RateLimiterAPI</span>({
-  threshold<span class="pl-k">:</span> <span class="pl-c1">5</span>, <span class="pl-c">// leave `threshold` amount of api requests intact (minimum: 1)</span>
-})</pre></div>
-
-<p>Pass an optional <code>threshold</code> value which would limit the total rate limits till the threshold is reached in the current session pulse till rate reset.</p>
-
-<hr>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">const</span> <span class="pl-c1">request</span> <span class="pl-k">=</span> <span class="pl-smi">rateLimiter</span>.<span class="pl-en">limit</span>(requestHandler) <span class="pl-c">//=&gt; Promise</span>
-
-<span class="pl-k">function</span> <span class="pl-en">requestHandler</span>(<span class="pl-smi">responseHandler</span>) {
-  <span class="pl-en">fetch</span>(<span class="pl-s"><span class="pl-pds">'</span>https://api.example.com/get<span class="pl-pds">'</span></span>)
-    .<span class="pl-en">then</span>((<span class="pl-smi">response</span>) <span class="pl-k">=&gt;</span> {
-      <span class="pl-smi">rateLimiter</span>.<span class="pl-en">updateRateLimits</span>({
-        rateLimit<span class="pl-k">:</span> <span class="pl-smi">response</span>.<span class="pl-c1">headers</span>.<span class="pl-smi">rateLimit</span>,
-        rateRemaining<span class="pl-k">:</span> <span class="pl-smi">response</span>.<span class="pl-c1">headers</span>.<span class="pl-smi">rateRemaining</span>,
-        rateReset<span class="pl-k">:</span> <span class="pl-smi">response</span>.<span class="pl-c1">headers</span>.<span class="pl-smi">rateReset</span>,
-      })
-
-      <span class="pl-en">responseHandler</span>(<span class="pl-c1">null</span>, <span class="pl-smi">response</span>.<span class="pl-c1">body</span>)
-    })
-    .<span class="pl-en">catch</span>((<span class="pl-smi">err</span>) <span class="pl-k">=&gt;</span> {
-      <span class="pl-en">responseHandler</span>(err)
-    })
-}</pre></div>
-
-<p>The <code>limit</code> method is passed a <code>requestHandler</code> which would manage the request and then call the node-style <code>responseHandler</code> callback (which gets passed by the RateLimiter library to the <code>requestHandler</code> function) after the request is successful or unsuccessful accordingly.</p>
-
-<p>The <code>request</code> method returns a <code>Promise</code>.</p>
-
-<blockquote>
-<p>responseHandler(Error, response)<br>
-where the first parameter is the Error object and the seconds parameter is the <code>response</code>.</p>
-</blockquote>
-
-<p><code>responseHandler</code> callback must be called to continue getting responses.</p>
-
-<p>Update the rate limits i.e. <code>{rateLimit, rateRemaining, rateReset}</code> got from the header using <code>updateRateLimits</code> method.</p>
-
-<hr>
-
-<div class="highlight highlight-source-js"><pre>request
-  .<span class="pl-en">then</span>((<span class="pl-smi">response</span>) <span class="pl-k">=&gt;</span> {
-    <span class="pl-en">console</span>.<span class="pl-c1">dir</span>(response, {colors<span class="pl-k">:</span><span class="pl-c1">1</span>})
-  })
-  .<span class="pl-en">catch</span>((<span class="pl-smi">error</span>) <span class="pl-k">=&gt;</span> {
-    <span class="pl-en">console</span>.<span class="pl-c1">error</span>(<span class="pl-smi">error</span>.<span class="pl-smi">message</span>)
-  })</pre></div>
-
-<p>When the request completes, the <code>Promise</code> resolves and can be thenable to get the response or error.</p>
-
-<h2>
-<a id="stats-" class="anchor" href="#stats-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="stats"></a>Stats <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h2>
-
-<p>1 text file.<br>
-1 unique file.<br>
-0 files ignored.  </p>
-
-<p><a href="https://github.com/AlDanial/cloc">https://github.com/AlDanial/cloc</a> v 1.66  T=0.04 s (22.7 files/s, 2516.9 lines/s)</p>
-
-<table>
-<thead>
-<tr>
-<th align="left">Language</th>
-<th align="center">files</th>
-<th align="center">blank</th>
-<th align="center">comment</th>
-<th align="center">code</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">JavaScript</td>
-<td align="center">1</td>
-<td align="center">12</td>
-<td align="center">37</td>
-<td align="center">62</td>
-</tr>
-</tbody>
-</table>
-
-<h2>
-<a id="technologies-used-" class="anchor" href="#technologies-used-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="techs"></a>Technologies Used <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h2>
-
-<ul>
-<li>
-<a href="http://babeljs.io"><strong>Babel</strong></a> — Transpiles modern JS to compatible and runnable JS</li>
-<li>
-<a href="https://github.com/stampit-org/stampit#readme"><strong>Stamp It</strong></a> - Composable inheritance object creation libray</li>
-<li>
-<a href="https://caolan.github.io/async/index.html"><strong>Async JS</strong></a> - Utility for asynchronous functions</li>
-<li>
-<a href="https://lodash.com/"><strong>Lodash</strong></a> - Utility library</li>
-</ul>
-
-<h2>
-<a id="help--support-" class="anchor" href="#help--support-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="help"></a>Help &amp; Support <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h2>
-
-<ul>
-<li>
-<a href="https://babeljs.slack.com"><strong>BabelJS</strong></a> — BabelJS Slack Chat Room</li>
-<li>
-<a href="https://gitter.im/nodejs/node"><strong>nodejs/node</strong></a> — NodeJS Gitter Chat Room</li>
-<li>
-<a href="https://medium.com/@koresar/fun-with-stamps-episode-1-stamp-basics-e0627d81efe0"><strong>Fun with Stamps</strong></a> - Learn StampIt</li>
-</ul>
-
-<h2>
-<a id="contributors-" class="anchor" href="#contributors-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="contrib"></a>Contributors <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h2>
-
-
-
-<table>
-<thead>
-<tr>
-<th align="center">
-<a href="http://about.me/abhisekp"><img src="https://avatars.githubusercontent.com/u/1029200?v=3" width="100px;"><br><sub>Abhisek Pattnaik</sub></a><br><a href="https://github.com/abhisekp/rate-limiter-api/commits?author=abhisekp"><g-emoji alias="computer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4bb.png">💻</g-emoji></a> <g-emoji alias="art" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3a8.png">🎨</g-emoji> <a href="https://github.com/abhisekp/rate-limiter-api/commits?author=abhisekp"><g-emoji alias="book" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d6.png">📖</g-emoji></a> <g-emoji alias="bulb" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png">💡</g-emoji>
-</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-
-
-
-<p>This project follows the <a href="https://github.com/kentcdodds/all-contributors#emoji-key">all-contributors</a> specification.</p>
-
-<blockquote>
-<p><strong>All types of Contributions are Welcome</strong> <g-emoji alias="pray" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f64f.png">🙏</g-emoji></p>
-</blockquote>
-
-<h2>
-<a id="license-" class="anchor" href="#license-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="license"></a>License <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
-</h2>
-
-<p><a href="LICENSE"><strong>MIT</strong></a> © <a href="https://github.com/abhisekp"><strong>Abhisek Patnaik</strong></a></p>
-
-<blockquote>
-<hr>
-
-<p><a id="contact"></a></p>
-
-<p align="center">
-Tweet <kbd><a href="https://twitter.com/abhisek"><b><img src="https://i.imgur.com/wOPZd0Y.png?1"> @abhisek</b></a></kbd><br>
-Know <kbd><b><a href="https://about.me/abhisekp">about/abhisekp</a></b></kbd><br>
-Chat with <kbd><a href="https://gitter.im/abhisekp">
-<img src="https://i.imgur.com/ThSWa6Y.png?2"> <b>@abhisekp</b></a></kbd>
-</p>
-
-<hr>
-</blockquote>
-
-<div align="right">
- <a href="#toc" title="Table of Contents"><kbd><b>Table of Contents ⮭</b></kbd></a><br>
- <a href="#app-top"><kbd><b>back to top ⮭</b></kbd></a>
-</div>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/abhisekp/rate-limiter-api">Rate Limiter API</a> is maintained by <a href="https://github.com/abhisekp">abhisekp</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
+    <section class="trust-strip" aria-label="Package characteristics">
+      <div class="trust-inner"><span><b>01</b> Reserve quota before dispatch</span><span><b>02</b> Queue until the next reset</span><span><b>03</b> Choose callbacks or Promises</span><span><b>04</b> Keep the old API on 1.x</span></div>
     </section>
 
-  
-  </body>
+    <section class="section-wrap section-block" id="how-it-works">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE SMALL THING THAT HELPS</p><h2>Make every request count.</h2></div>
+        <p>Give the limiter your provider’s quota headers. It reserves capacity as work starts, holds queued calls when the budget runs out, and resumes when the provider window resets.</p>
+      </div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-index">01 / SET THE RULES</span><div class="step-art config-art"><span class="slider-line"><i></i></span><span class="slider-line short"><i></i></span><span class="config-badge">concurrency: 2</span></div><h3>Choose your pace</h3><p>Set a safety threshold, concurrency, and a burst first or uniform strategy.</p></article>
+        <article class="step-card"><span class="step-index">02 / QUEUE YOUR WORK</span><div class="step-art queue-art"><i></i><i></i><i></i><span class="queue-chevron">→</span><b>01</b><b>02</b></div><h3>Send without guessing</h3><p>Hand each operation to <code>limit()</code>. The scheduler dispatches only what the budget allows.</p></article>
+        <article class="step-card"><span class="step-index">03 / KEEP MOVING</span><div class="step-art resume-art"><span class="resume-clock">◷</span><span class="resume-wave"></span><b>reset</b></div><h3>Resume at reset</h3><p>When the provider’s window opens again, the waiting queue continues on its own.</p></article>
+      </div>
+    </section>
+
+    <section class="playground-section" id="playground">
+      <div class="section-wrap playground-wrap">
+        <div class="playground-intro"><p class="eyebrow"><span class="status-dot"></span> INTERACTIVE PLAYGROUND</p><h2>See the queue<br>in motion.</h2><p>This runs the published 2.0.0 browser bundle with simulated requests. Nothing is sent to an external API.</p>
+          <div class="playground-controls">
+            <label for="quota-input">Quota per window <output id="quota-value" for="quota-input">6</output></label>
+            <input id="quota-input" type="range" min="3" max="10" value="6">
+            <div class="range-ends"><span>3 requests</span><span>10 requests</span></div>
+            <label for="request-count">Requests to queue</label>
+            <select id="request-count"><option value="10">10 requests</option><option value="6">6 requests</option><option value="14">14 requests</option></select>
+            <label for="concurrency-input">Concurrent calls <output id="concurrency-value" for="concurrency-input">2</output></label>
+            <input id="concurrency-input" type="range" min="1" max="4" value="2">
+            <div class="range-ends"><span>1 at a time</span><span>4 at a time</span></div>
+            <button class="button button-primary run-demo" id="run-demo" type="button" disabled><span class="run-symbol">▶</span> <span>Loading demo…</span></button>
+            <p class="demo-note" id="demo-status" role="status" aria-live="polite">Connecting to the published package…</p>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <div class="demo-panel-head"><div><span class="panel-label">SIMULATED API</span><strong>Request monitor</strong></div><span class="panel-status" id="panel-status"><i></i> Ready</span></div>
+          <div class="monitor-stats"><div><span>COMPLETED</span><b id="completed-count">0 <small>/ 0</small></b></div><div><span>IN FLIGHT</span><b id="active-count">0</b></div><div><span>WAITING</span><b id="queued-count">0</b></div></div>
+          <div class="quota-monitor"><div class="quota-monitor-head"><span>WINDOW CAPACITY</span><strong id="quota-count">6 available</strong></div><div class="quota-monitor-track" id="quota-track" role="img" aria-label="6 requests available"><span></span></div><div class="quota-monitor-foot"><span>Resets in <b id="reset-countdown">—</b></span><span>Headroom <b>1 request</b></span></div></div>
+          <div class="request-list" id="request-list" aria-live="polite" aria-label="Request activity"><div class="empty-state"><span class="empty-mark">↘</span><strong>Your queue is clear.</strong><span>Run a batch to watch requests pass through.</span></div></div>
+          <div class="demo-panel-foot"><span><i></i> Powered by rate-limiter-api@2.0.0</span><button id="clear-demo" type="button">Clear activity</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-wrap section-block start-section" id="get-started">
+      <div class="section-heading">
+        <div><p class="eyebrow">GET STARTED</p><h2>Two release lines.<br>One clear choice.</h2></div>
+        <p>New projects should start on 2.x. Existing projects can stay on the callback-compatible 1.x line and receive maintenance updates.</p>
+      </div>
+      <div class="release-grid">
+        <article class="release-card modern-card"><div class="release-card-top"><span class="version-mark modern-mark">02</span><span class="release-label label-modern"><i></i> CURRENT</span></div><h3>Modern API</h3><p>Promise-based, typed, and ready for current Node.js.</p><div class="install-line"><code>npm install rate-limiter-api</code><button class="icon-copy" type="button" data-copy="npm install rate-limiter-api" aria-label="Copy modern install command">⧉</button></div><div class="release-card-bottom"><span>v2.0.0</span><span>Node.js 22+</span><a href="https://www.npmjs.com/package/rate-limiter-api" target="_blank" rel="noreferrer">Docs &amp; package ↗</a></div></article>
+        <article class="release-card legacy-card"><div class="release-card-top"><span class="version-mark legacy-mark">01</span><span class="release-label label-legacy"><i></i> COMPATIBILITY</span></div><h3>Callback API</h3><p>Preserves the original Stampit-style factory and callback behavior.</p><div class="install-line"><code>npm install rate-limiter-api@legacy</code><button class="icon-copy" type="button" data-copy="npm install rate-limiter-api@legacy" aria-label="Copy legacy install command">⧉</button></div><div class="release-card-bottom"><span>v1.0.12</span><span>Node.js 6+</span><a href="https://www.npmjs.com/package/rate-limiter-api/v/1.0.12" target="_blank" rel="noreferrer">Docs &amp; package ↗</a></div></article>
+      </div>
+      <div class="code-example">
+        <div class="code-head"><span><i></i><i></i><i></i></span><div class="code-tabs" role="tablist" aria-label="Code example"><button class="code-tab active" type="button" role="tab" aria-selected="true" data-example="promise">Promise</button><button class="code-tab" type="button" role="tab" aria-selected="false" data-example="callback">Callback</button></div><button class="code-copy" type="button" data-copy-target="code-block">Copy code</button></div>
+        <pre id="code-block" aria-live="polite"><code><span class="code-muted">// Queue a request and keep a little quota in reserve</span>
+<span class="code-key">const</span> limiter = <span class="code-fn">RateLimiterAPI</span>({
+  threshold: <span class="code-num">1</span>,
+  concurrency: <span class="code-num">2</span>,
+})
+
+limiter.<span class="code-fn">updateRateLimits</span>({
+  rateLimit: <span class="code-num">60</span>,
+  rateRemaining: <span class="code-num">42</span>,
+  rateReset: <span class="code-fn">Date</span>.<span class="code-fn">now</span>() + <span class="code-num">60_000</span>,
+})
+
+<span class="code-key">const</span> result = <span class="code-key">await</span> limiter.<span class="code-fn">limit</span>(() =&gt; fetch(<span class="code-string">'/api/data'</span>))</code></pre>
+      </div>
+    </section>
+
+    <section class="api-band" aria-label="API features"><div class="section-wrap api-band-inner"><div><span class="api-symbol">⌁</span><span><b>Small surface area</b><small><code>limit()</code> · <code>updateRateLimits()</code> · <code>getRateLimits()</code></small></span></div><div><span class="api-symbol">◷</span><span><b>Provider aware</b><small>Uses the reset time you pass in</small></span></div><div><span class="api-symbol">↗</span><span><b>Typed and tested</b><small>Built from a shared scheduler</small></span></div><a href="https://github.com/abhisekp/rate-limiter-api/blob/master/README.md" target="_blank" rel="noreferrer">Read the API guide <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+
+  <footer class="footer"><div class="section-wrap footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 17h6l4-10 6 19 4-9h4"/></svg></span><span>rate-limiter<span class="brand-light">-api</span></span></a><p>Open source, MIT licensed. Made for the moments your API says “slow down.”</p><div><a href="https://github.com/abhisekp/rate-limiter-api" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.npmjs.com/package/rate-limiter-api" target="_blank" rel="noreferrer">npm ↗</a></div><small>© 2026 Abhisek Patnaik</small></div></footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
 </html>
+
