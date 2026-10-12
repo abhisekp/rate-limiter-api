@@ -243,6 +243,7 @@
 
   quotaInput.addEventListener('input', function () { document.querySelector('#quota-value').value = quotaInput.value })
   concurrencyInput.addEventListener('input', function () { document.querySelector('#concurrency-value').value = concurrencyInput.value })
+  requestCount.addEventListener('change', function () { runButton.querySelector('span:last-child').textContent = 'Run ' + requestCount.value + ' requests' })
   runButton.addEventListener('click', runDemo)
   document.querySelector('#clear-demo').addEventListener('click', function () {
     if (limiter) limiter.close()
@@ -267,18 +268,21 @@
     requestCount.disabled = false
     drawEmptyQuota()
     runButton.disabled = typeof window.RateLimiterAPI !== 'function'
-    runButton.querySelector('span:last-child').textContent = 'Run 10 requests'
+    runButton.querySelector('span:last-child').textContent = 'Run ' + requestCount.value + ' requests'
     setPanelStatus('', 'Ready')
     setDemoStatus('Ready. Change the quota or concurrency, then send a batch.')
   })
 
   if (typeof window.RateLimiterAPI === 'function') {
     runButton.disabled = false
+    runButton.querySelector('span:last-child').textContent = 'Run ' + requestCount.value + ' requests'
     setDemoStatus('Ready. Change the quota or concurrency, then send a batch.')
     drawEmptyQuota()
   } else if (window.rateLimiterBundleFailed) {
+    runButton.querySelector('span:last-child').textContent = 'Demo unavailable'
     setDemoStatus('The package bundle could not load. Check your connection and refresh to try again.')
   } else {
+    runButton.querySelector('span:last-child').textContent = 'Demo unavailable'
     setDemoStatus('The package bundle is unavailable in this browser.')
   }
 
