@@ -8,9 +8,9 @@
   <title>Rate Limiter API — Stay within the limit</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%2375e5bd'/%3E%3Cpath d='M9 21h7l4-10 5 18 4-8h3' fill='none' stroke='%230b1020' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('rate-limiter-theme') === 'light' ? 'light' : 'dark' } catch (_) { document.documentElement.dataset.theme = 'dark' }</script>
-  <link rel="stylesheet" href="stylesheets/site.css?v=5">
+  <link rel="stylesheet" href="stylesheets/site.css?v=6">
   <script defer src="https://cdn.jsdelivr.net/npm/rate-limiter-api@2.0.0/dist/rate-limiter-api.js" onload="window.rateLimiterBundleReady=true" onerror="window.rateLimiterBundleFailed=true"></script>
-  <script defer src="scripts/site.js?v=5"></script>
+  <script defer src="scripts/site.js?v=6"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,7 +19,10 @@
       <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 17h6l4-10 6 19 4-9h4"/></svg></span>
       <span>rate-limiter<span class="brand-light">-api</span></span>
     </a>
-    <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span aria-hidden="true">☀</span><span class="theme-label">Light</span></button>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.6 8.6 0 0 1 10.8 3.5a8.6 8.6 0 1 0 9.7 9.7Z"/></svg>
+    </button>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button>
     <nav id="site-nav" class="site-nav" aria-label="Main navigation">
       <a href="#how-it-works">How it works</a>

@@ -7,8 +7,7 @@
     document.documentElement.dataset.theme = light ? 'light' : 'dark'
     themeToggle.setAttribute('aria-pressed', String(light))
     themeToggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme')
-    themeToggle.querySelector('span:first-child').textContent = light ? '☾' : '☀'
-    themeToggle.querySelector('.theme-label').textContent = light ? 'Dark' : 'Light'
+    themeToggle.title = light ? 'Switch to dark theme' : 'Switch to light theme'
     document.querySelector('meta[name="theme-color"]').content = light ? '#f6faf8' : '#0b1020'
   }
   applyTheme(document.documentElement.dataset.theme)
