@@ -17,4 +17,5 @@
 .quota-monitor-track span.reserved{background:var(--amber);opacity:.78}
 .accent-word{text-decoration:underline;text-decoration-color:rgba(120,229,189,.45);text-decoration-thickness:1px;text-underline-offset:7px}
 .accent-word:after{display:none}
+@media(max-width:680px){.hero-visual{overflow:hidden}.hero-visual .queue-card{width:calc(100% - 8px)}}
 
