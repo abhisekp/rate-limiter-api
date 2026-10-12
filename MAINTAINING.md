@@ -1,0 +1,17 @@
+# Maintaining both npm release lines
+
+The repository root is a private build project. Release manifests live in `packages/legacy` (1.x) and `packages/modern` (2.x). Both use `src/scheduler.js`. Keep scheduler fixes and regression cases shared; only wrapper/API differences belong in `src/legacy.js` and `src/index.js`.
+
+`npm ci --ignore-scripts && npm run check` builds both releases, exercises scheduling and real HTTP requests, checks declaration files, packs both archives, and installs them into separate clean consumer projects offline. Browser globals, Node exports, ESM and TypeScript are verified from the installed archives. Build tools require Node 22+; legacy consumers support Node 6+, modern consumers Node 22+. CI tests Node 22/24 on Linux/Windows and runs the packed legacy artifact on Node 6/10/18/22/24.
+
+For a release, bump the relevant `packages/*/package.json` version. Review migration notes, run checks, merge the PR, then manually run `publish.yml` from master. It rebuilds and verifies both archives, checks the current full master SHA, and publishes the verified archives without repacking. 1.x uses the `legacy` npm dist-tag; 2.x uses `latest`. Publishing 1.x never changes `latest`. The private root prevents accidentally publishing build-only source.
+
+Configure npm trusted publishing for the existing `rate-limiter-api` package: GitHub user `abhisekp`, repository `rate-limiter-api`, workflow `publish.yml`, environment `npm-release`, with direct publishing allowed. See https://docs.npmjs.com/trusted-publishers/. No npm token is committed. Initial setup requires package-owner npm access. The workflow uses npm 11.21.0, satisfying the documented OIDC minimum version. The workflow will not publish until npm recognizes that trusted publisher.
+
+Local fallback, after owner authentication and all checks: `npm publish artifacts/rate-limiter-api-1.0.12.tgz --tag legacy` and `npm publish artifacts/rate-limiter-api-2.0.0.tgz --tag latest`. Use the exact tested archive; versions are immutable once published. After publication, clean-install both exact versions and both tags, repeat consumer checks, and confirm registry metadata.
+
+The legacy adapter pins Stampit 2.1.2 to preserve the actual published factory semantics. Lodash is overridden to the patched 4.x version; the build aliases three old Lodash module paths. Compatibility tests protect refs, deep props, methods, initializers, static members and composition. `test/fixtures/legacy-contract.json` captures observable behavior from npm 1.0.11. Do not update that oracle merely to make a change pass.
+
+1.x ignores invalid headers and retains historically inert strategy/request-cap options. 2.x rejects invalid updates and supports Promise handlers, a concurrency cap, uniform pacing, queued cancellation, snapshots and shutdown. Timeouts complete library tasks without cancelling underlying requests. The scheduler reserves budget before dispatch and reconciles headers conservatively. No provider header means no known quota; no provider reset means no invented repeating window. If responses omit the reset timestamp, they cannot identify stale previous-window responses; applications should always pass it when available.
+
+Website deployment and design changes are independent and are not triggered by these npm workflows.

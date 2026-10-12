@@ -1,1 +1,1 @@
-module.exports = require('./dist/rate-limiter-api')
+module.exports = require('./dist/rate-limiter-api.cjs')

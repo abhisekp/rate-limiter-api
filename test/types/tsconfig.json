@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "strict": true, "target": "ES2020", "module": "NodeNext", "moduleResolution": "NodeNext",
+    "lib": ["ES2020", "DOM"], "esModuleInterop": true,
+    "skipLibCheck": false, "noEmit": true
+  },
+  "include": ["./*.cts", "./*.mts"]
+}
