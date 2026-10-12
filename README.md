@@ -1,7 +1,7 @@
 # <a id="app-top"></a> Rate Limiter API
 A simple library to easily manage rate limits of APIs without any hassles.
 
-The maintained release candidates are **1.0.12** (compatible Stampit/callback API, Node 6+) and **2.0.0** (modern ESM/CommonJS/TypeScript, Node 22+). Both use a shared scheduler and regression tests. These versions are prepared for publication; npm currently serves 1.0.11 until the owner completes publishing.
+The maintained npm releases are **1.0.12** (compatible Stampit/callback API, Node 6+, install with `@legacy`) and **2.0.0** (modern ESM/CommonJS/TypeScript, Node 22+, install with `@latest`). Both were published on 12 October 2026 with signed GitHub Actions provenance and use a shared scheduler and regression tests.
 
 - [Compatible 1.x usage](packages/legacy/README.md)
 - [Modern 2.x usage and migration](packages/modern/README.md)

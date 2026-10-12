@@ -2,6 +2,7 @@ import {readFile} from 'node:fs/promises'
 import {spawnSync} from 'node:child_process'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
+import {waitForRegistry} from './registry-wait.mjs'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const line = process.env.RELEASE_LINE
 if (!['both', 'legacy', 'modern'].includes(line)) throw new Error('Choose both, legacy or modern')
@@ -14,4 +15,10 @@ for (const release of line === 'both' ? ['legacy', 'modern'] : [line]) {
   // No token is embedded. npm uses the configured workflow's OIDC identity.
   const result = spawnSync('npm', args, {cwd: root, stdio: 'inherit'})
   if (result.status !== 0) throw new Error(`${release} publishing failed`)
+  console.log(`Waiting for npm to finish processing ${manifest.version}`)
+  await waitForRegistry(() => {
+    const check = spawnSync('npm', ['view', `rate-limiter-api@${release === 'legacy' ? 'legacy' : 'latest'}`, 'version', '--prefer-online', '--fetch-retries=0'], {cwd: root, encoding: 'utf8', timeout: 30000})
+    if (check.status !== 0) throw new Error(check.stderr || check.stdout || String(check.error))
+    return check.stdout.trim()
+  }, manifest.version)
 }
