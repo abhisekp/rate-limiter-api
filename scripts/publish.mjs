@@ -9,12 +9,17 @@ if (!['both', 'legacy', 'modern'].includes(line)) throw new Error('Choose both, 
 if (process.env.GITHUB_REF !== 'refs/heads/master' || !/^[0-9a-f]{40}$/.test(process.env.GITHUB_SHA || '')) throw new Error('Publish requires a full master commit SHA')
 const head = spawnSync('git', ['rev-parse', 'origin/master'], {cwd: root, encoding: 'utf8'})
 if (head.status !== 0 || head.stdout.trim() !== process.env.GITHUB_SHA) throw new Error('Master head changed')
+const published = []
 for (const release of line === 'both' ? ['legacy', 'modern'] : [line]) {
   const manifest = JSON.parse(await readFile(path.join(root, 'packages', release, 'package.json')))
   const args = ['publish', path.join(root, 'artifacts', `rate-limiter-api-${manifest.version}.tgz`), '--ignore-scripts', '--access', 'public', '--tag', release === 'legacy' ? 'legacy' : 'latest', '--provenance']
   // No token is embedded. npm uses the configured workflow's OIDC identity.
   const result = spawnSync('npm', args, {cwd: root, stdio: 'inherit'})
   if (result.status !== 0) throw new Error(`${release} publishing failed`)
+  published.push({release, manifest})
+}
+// Submit every selected archive before a registry delay can stop verification.
+for (const {release, manifest} of published) {
   console.log(`Waiting for npm to finish processing ${manifest.version}`)
   await waitForRegistry(() => {
     const check = spawnSync('npm', ['view', `rate-limiter-api@${release === 'legacy' ? 'legacy' : 'latest'}`, 'version', '--prefer-online', '--fetch-retries=0'], {cwd: root, encoding: 'utf8', timeout: 30000})
