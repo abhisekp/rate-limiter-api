@@ -2,6 +2,7 @@ import {mkdtemp, readFile, writeFile, mkdir} from 'node:fs/promises'
 import {spawnSync} from 'node:child_process'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
+import {waitForRegistry} from './registry-wait.mjs'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 if (!process.env.npm_execpath) throw new Error('Run this script via npm run verify:packages')
 await mkdir(path.join(root, 'build/consumers'), {recursive: true})
@@ -20,8 +21,8 @@ for (const line of selection === 'both' ? ['legacy', 'modern'] : [selection]) {
   const archive = registry ? `rate-limiter-api@${manifest.version}` : path.join(root, 'artifacts', `rate-limiter-api-${manifest.version}.tgz`)
   if (registry) {
     const tag = line === 'legacy' ? 'legacy' : 'latest'
-    const taggedVersion = execute(process.execPath, [process.env.npm_execpath, 'view', `rate-limiter-api@${tag}`, 'version'], root)
-    if (taggedVersion !== manifest.version) throw new Error(`${tag} does not point to ${manifest.version}`)
+    console.log(`Waiting for ${tag} to expose ${manifest.version} on npm`)
+    await waitForRegistry(() => execute(process.execPath, [process.env.npm_execpath, 'view', `rate-limiter-api@${tag}`, 'version', '--prefer-online', '--fetch-retries=0'], root), manifest.version)
   }
   execute(process.execPath, [process.env.npm_execpath, 'install', ...(registry ? [] : ['--offline']), '--ignore-scripts', '--no-audit', '--no-fund', '--cache', path.join(root, 'build/npm-cache'), '--package-lock=false', archive], directory)
   const installed = path.join(directory, 'node_modules/rate-limiter-api')
