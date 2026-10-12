@@ -1,0 +1,16 @@
+{
+  "name": "rate-limiter-api", "version": "2.0.0",
+  "description": "Promise and callback API rate limiting with a shared, tested scheduler",
+  "main": "index.js", "module": "dist/rate-limiter-api.mjs", "types": "index.d.ts",
+  "exports": {
+    ".": {"import": {"types": "./index.d.mts", "default": "./dist/rate-limiter-api.mjs"}, "require": {"types": "./index.d.ts", "default": "./index.js"}},
+    "./dist/*": "./dist/*", "./package.json": "./package.json"
+  },
+  "files": ["index.js", "index.d.ts", "index.d.mts", "dist", "src"],
+  "unpkg": "dist/rate-limiter-api.js", "jsdelivr": "dist/rate-limiter-api.js",
+  "engines": {"node": ">=22"},
+  "repository": {"type": "git", "url": "git+https://github.com/abhisekp/rate-limiter-api.git"},
+  "bugs": {"url": "https://github.com/abhisekp/rate-limiter-api/issues"},
+  "homepage": "https://rate-limiter-api.js.org", "author": "Abhisek Pattnaik", "license": "MIT",
+  "publishConfig": {"access": "public", "tag": "latest"}
+}

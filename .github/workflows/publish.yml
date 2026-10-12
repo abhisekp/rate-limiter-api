@@ -1,0 +1,53 @@
+name: Publish maintained npm releases
+on:
+  workflow_dispatch:
+    inputs:
+      line:
+        description: Release line
+        type: choice
+        options: [both, legacy, modern]
+        default: both
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/master'
+    uses: ./.github/workflows/release-check.yml
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: npm-release
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.21.0
+      - name: Require the verified commit to remain the master head
+        run: |
+          git fetch origin master
+          test "$(git rev-parse origin/master)" = "$GITHUB_SHA"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: verified-releases
+          path: artifacts
+      - name: Publish exactly the verified archives with separate dist-tags
+        env:
+          RELEASE_LINE: ${{ inputs.line }}
+        run: node scripts/publish.mjs
+      - run: npm ci --ignore-scripts
+      - name: Verify both published versions and tags from clean installs
+        env:
+          VERIFY_REGISTRY: '1'
+          RELEASE_LINE: ${{ inputs.line }}
+        run: npm run verify:packages

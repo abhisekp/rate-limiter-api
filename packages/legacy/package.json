@@ -1,0 +1,12 @@
+{
+  "name": "rate-limiter-api", "version": "1.0.12",
+  "description": "Callback API rate limiting with the compatible Stampit factory",
+  "main": "index.js", "types": "index.d.ts",
+  "files": ["index.js", "index.d.ts", "dist", "src", "THIRD_PARTY_LICENSES.txt"],
+  "unpkg": "dist/rate-limiter-api.js", "jsdelivr": "dist/rate-limiter-api.js",
+  "engines": {"node": ">=6"},
+  "repository": {"type": "git", "url": "git+https://github.com/abhisekp/rate-limiter-api.git"},
+  "bugs": {"url": "https://github.com/abhisekp/rate-limiter-api/issues"},
+  "homepage": "https://rate-limiter-api.js.org", "author": "Abhisek Pattnaik", "license": "MIT",
+  "publishConfig": {"access": "public", "tag": "legacy"}
+}

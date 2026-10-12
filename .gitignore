@@ -42,3 +42,7 @@ jspm_packages
 *.zip
 *.tar.gz
 !dist
+artifacts/
+build/
+!packages/
+!packages/**

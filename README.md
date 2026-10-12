@@ -1,6 +1,14 @@
 # <a id="app-top"></a> Rate Limiter API
 A simple library to easily manage rate limits of APIs without any hassles.
 
+The maintained release candidates are **1.0.12** (compatible Stampit/callback API, Node 6+) and **2.0.0** (modern ESM/CommonJS/TypeScript, Node 22+). Both use a shared scheduler and regression tests. These versions are prepared for publication; npm currently serves 1.0.11 until the owner completes publishing.
+
+- [Compatible 1.x usage](packages/legacy/README.md)
+- [Modern 2.x usage and migration](packages/modern/README.md)
+- [Build, tests, CI and release instructions](MAINTAINING.md)
+
+The repository root is a private build project. Run `npm ci --ignore-scripts` and `npm run check` to verify both packed releases. The older usage guide below describes the callback API; use the release guides for current exports, reset units and supported options.
+
 [![Rate Limiter API image](http://i.imgur.com/JDFpgQZ.jpg "Rate Limiter API image")](#app-top)
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) [![MIT License](https://img.shields.io/badge/License-MIT-56A902.svg?style=flat-square&maxAge=2592000)](LICENSE) [![npm version](https://img.shields.io/npm/v/rate-limiter-api.svg)](https://badge.fury.io/js/rate-limiter-api) [![Join the chat at https://gitter.im/abhisekp/rate-limiter-api](https://badges.gitter.im/abhisekp/rate-limiter-api.svg)](https://gitter.im/abhisekp/rate-limiter-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fabhisekp%2Frate-limiter-api.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fabhisekp%2Frate-limiter-api?ref=badge_shield)
@@ -22,7 +30,7 @@ A simple library to easily manage rate limits of APIs without any hassles.
 ## <a id="usage"></a>Usage <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
 #### <a id="usage-browser"></a>Browser <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
 ```html
-<script src="https://cdn.rawgit.com/abhisekp/rate-limiter-api/master/dist/rate-limiter-api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/rate-limiter-api@1.0.12/dist/rate-limiter-api.js"></script>
 
 <script type="text/javascript">
   var rateLimiter = RateLimiterAPI()
@@ -31,7 +39,7 @@ A simple library to easily manage rate limits of APIs without any hassles.
 
 #### <a id="usage-nodejs"></a>NodeJS <a href="#toc" title="Table of Contents"><kbd>⮭</kbd></a>
 ```sh
-$ {sudo -H} npm install -S rate-limiter-api
+npm install rate-limiter-api@legacy
 ```
 
 ```js
@@ -64,9 +72,10 @@ function requestHandler(responseHandler) {
   fetch('https://api.example.com/get')
     .then((response) => {
       rateLimiter.updateRateLimits({
-        rateLimit: response.headers.rateLimit,
-        rateRemaining: response.headers.rateRemaining,
-        rateReset: response.headers.rateReset,
+        rateLimit: response.headers.get('X-RateLimit-Limit') || undefined,
+        rateRemaining: response.headers.get('X-RateLimit-Remaining') || undefined,
+        rateReset: response.headers.has('X-RateLimit-Reset')
+          ? Number(response.headers.get('X-RateLimit-Reset')) * 1000 : undefined,
       })
 
       responseHandler(null, response.body)
